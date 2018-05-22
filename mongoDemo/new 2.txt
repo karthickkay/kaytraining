@@ -1,0 +1,221 @@
+use admin
+db
+show dbs
+use student
+db.subjects.insert({"name":"Karthick Kay AI"})
+db.dropDatabase()
+
+use cts
+db
+db.createCollection("loction")
+show dbs
+db.createCollection("department")
+db.location.drop()
+db.createCollection("loction")
+show collections
+
+db.associates.insert({
+  "id" : 1,
+  "fname" : "karthick",
+  "lname" : "kay",
+  "age":25
+})
+  "experience" :2
+})
+
+db.associates.insert([
+  {
+    "id": 2,
+    "fname": "preethi",
+    "lname": "kay",
+    "age": 20,
+    "experience": 0.5
+  },
+  {
+    "id": 3,
+    "fname": "krish",
+    "lname": "kay",
+    "age": 25,
+    "experience": 1
+  },
+  {
+    "id": 4,
+    "fname": "Ram",
+    "lname": "raja",
+    "age": 30,
+    "experience": 5
+  },
+  {
+    "id": 5,
+    "fname": "Ravi",
+    "lname": "Sharma",
+    "age": 45,
+    "experience": 6
+  },
+  {
+    "id": 6,
+    "fname": "Ravi",
+    "lname": "Sharma",
+    "age": 45,
+    "experience": 6
+  }
+])
+
+db.associates.find()
+
+show collections
+
+db.associates.findOne()
+
+db.associates.find(
+{
+  "id" : 1
+  }
+)
+db.associates.find(
+  {
+  "age" : {$gt:30}
+  }
+)
+db.associates.find(
+  {
+  "age" : {$gte:25}
+  }
+)
+db.associates.find(
+  {
+  "lname" : "kay"
+  }
+)
+db.associates.find(
+  {
+ $and: [{"age" :{$gt:20}},{"age" :{$lt:40}}]
+  }
+)
+db.associates.find(
+  {
+  $or: [{"age" :{$gt:25}}, {"lname":"kay"}]
+  }
+)
+
+db.associates.update(
+{
+  "_id": ObjectId("5b02698bd79fbc8617ddd074"),
+},
+{
+  $set:{
+  "age": 49,
+  "experience": 8
+  }
+  }
+)
+db.associates.find()
+
+
+db.associates.update(
+{
+  "fname": "Ravi",
+},
+{
+  $set:{
+  "gender": "female"
+  }
+  }
+)
+db.associates.update(
+{
+  "fname": "Ravi",
+},
+{
+  $set:{
+  "gender": "female"
+  }
+  },
+  {multi:true}
+)
+
+db.associates.remove(
+{
+  "fname" : "Ram"  
+}
+)
+db.associates.remove(
+{
+  "age" : {$gt:40}  
+},1
+)
+
+db.associates.find({}, {"_id":0, "fname":1}).skip(2).limit(2)
+db.associates.find({}, {"_id":0, "id" : 1, "fname":1}).sort({"lname" : -1 })
+
+
+
+
+use lottery
+
+for(i=0; i<1000000; ++i){
+  db.winnertenlac.insert({"id":i, "name":"kay"})
+}
+db.winnertenlac.find()
+
+use cts
+db.associates.find()
+db.associates.aggregate(
+[
+{
+  $group:{
+    "_id":"$gender", 
+    MaxAge:
+    {
+      $max:"$age"
+      }
+    }
+  }
+  ]
+  )
+
+db.associates.save([
+  { 
+    "id" : 1,  
+    "fname" : "karthick", 
+    "lname" : "kaykay", 
+    "age" : 25, 
+    "experience" : 2, 
+	"gender" : "male"
+},
+{ 
+    "id" : 3, 
+    "fname" : "krish", 
+    "lname" : "kaykay", 
+    "age" : 25, 
+    "experience" : 1, 
+	"gender" : "male"
+},
+{ 
+    "id" : 6,
+    "fname" : "Ravi", 
+    "lname" : "Sharma", 
+    "age" : 49, 
+    "experience" : 8, 
+	"gender" : "male"
+},
+{ 
+    "id" : 1, 
+    "fname" : "karthick", 
+    "lname" : "kaykay", 
+    "age" : 25, 
+    "experience" : 8, 
+	"gender" : "male"
+}
+])
+
+db.dropDatabase()
+use admin
+show databases
+use local
+use lottery
+use cts
+use nodemongo
+show collections
+
+db.tutorial.find()

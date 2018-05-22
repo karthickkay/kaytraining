@@ -1,0 +1,16 @@
+#slideshow{
+    position: relative;
+    width: 500px;
+    height: 200px;
+
+}
+#slide{
+    position: relative;
+    top: 100px;
+    left: 50px;
+
+}
+
+h1{
+    color: burlywood
+}
